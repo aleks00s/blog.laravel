@@ -6,13 +6,15 @@
         <div class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1 class="m-0">Categories</h1>
+                    <div class="col-sm-6 d-flex align-items-center">
+                        <h1 class="m-0 mr-2 ">Category:   {{ $category->title }}</h1>
+                        <a href="{{ route('admin.category.edit', $category->id) }}" class="fas fa-pen" ></a>
+
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Categories</li>
+                            <li class="breadcrumb-item active">Dashboard v1</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -27,8 +29,8 @@
                 <!-- Main row -->
                 <div class="row">
                     <div class="col-1 mb-3">
-                        <a href="{{ route('admin.category.create') }}" class="btn btn-block btn-primary">
-                            Add category</a>
+                        <a href="{{ route('admin.category.create') }}" class="btn btn-block btn-primary">Add
+                            category</a>
                     </div>
                 </div>
                 <div class="row">
@@ -36,23 +38,17 @@
                         <div class="card">
                             <div class="card-body table-responsive p-0">
                                 <table class="table table-hover text-nowrap">
-                                    <thead>
+                                    <tbody>
                                     <tr>
-                                        <th>ID</th>
-                                        <th>Category</th>
-                                        <th colspan="2"></th>
+                                        <td>ID</td>
+                                        <td>{{ $category->id }}</td>
 
                                     </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach($categories as $category)
                                     <tr>
-                                        <td>{{$category->id}}</td>
+                                        <td>Title</td>
                                         <td>{{ $category->title }}</td>
-                                        <td><a href="{{ route('admin.category.show', $category->id) }}" class="far fa-eye" ></a></td>
-                                        <td><a href="{{ route('admin.category.edit', $category->id) }}" class="fas fa-pen" ></a></td>
+
                                     </tr>
-                                    @endforeach
 
                                     </tbody>
                                 </table>
