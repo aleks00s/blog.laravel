@@ -27,7 +27,7 @@
                 <!-- Main row -->
                 <div class="row">
                     <div class="col-1 mb-3">
-                        <a href="{{ route('admin.category.create') }}" class="btn btn-block btn-primary">
+                        <a href="{{ route('admin.categories.create') }}" class="btn btn-block btn-primary">
                             Add category</a>
                     </div>
                 </div>
@@ -40,7 +40,7 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>Category</th>
-                                        <th colspan="2"></th>
+                                        <th colspan="3"></th>
 
                                     </tr>
                                     </thead>
@@ -49,8 +49,17 @@
                                     <tr>
                                         <td>{{$category->id}}</td>
                                         <td>{{ $category->title }}</td>
-                                        <td><a href="{{ route('admin.category.show', $category->id) }}" class="far fa-eye" ></a></td>
-                                        <td><a href="{{ route('admin.category.edit', $category->id) }}" class="fas fa-pen" ></a></td>
+                                        <td><a href="{{ route('admin.categories.show', $category->id) }}" class="far fa-eye" ></a></td>
+                                        <td><a href="{{ route('admin.categories.edit', $category->id) }}" class="text-success fas fa-pen" ></a></td>
+                                        <td>
+                                            <form action="{{ route('admin.categories.destroy', $category->id) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="border-0 bg-transparent">
+                                                    <i class="fas fa-trash text-danger" role="button"></i>
+                                                </button>
+                                            </form>
+                                            </td>
                                     </tr>
                                     @endforeach
 
