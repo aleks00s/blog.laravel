@@ -47,7 +47,8 @@
                                 <div class="form-group w-50">
                                     <label>Preview image</label>
                                     <div class="w-50 mb-2" >
-                                        <img src="{{ url('storage/' . $post->preview_image) }}" alt="preview_image" class="w-50">
+{{--                                        <img src="{{ url('storage/' . $post->preview_image) }}" alt="preview_image" class="w-50">--}}
+                                        <img src="{{ is_file('storage/' . $post->preview_image) ? url('storage/' . $post->preview_image) : $post->preview_image}}" alt="main_image" class="w-50">
                                     </div>
                                     <div class="input-group">
                                         <div class="custom-file">
@@ -65,7 +66,8 @@
                                 <div class="form-group w-50">
                                     <label>Main image</label>
                                     <div class="w-50 mb-2">
-                                        <img src="{{ url('storage/' . $post->main_image) }}" alt="main_image" class="w-50">
+{{--                                        <img src="{{ url('storage/' . $post->main_image) }}" alt="main_image" class="w-50">--}}
+                                        <img src="{{ is_file('storage/' . $post->main_image) ? url('storage/' . $post->main_image) : $post->main_image}}" alt="main_image" class="w-50">
                                     </div>
                                     <div class="input-group">
                                         <div class="custom-file">
