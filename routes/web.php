@@ -17,7 +17,13 @@ use Illuminate\Support\Facades\Route;
 Route::group(['namespace' => 'Main'], function () {
     Route::get('/', 'IndexController');
 });
-Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function () {
+Route::group(['middleware' => ['auth']], function() {
+    Route::get('/logout', function () {
+        Auth::logout();
+        return redirect('login');
+    });
+});
+Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['auth', 'admin', 'verified']], function () {
     Route::group(['namespace' => 'Main'], function () {
         Route::get('/', 'IndexController');
     });
@@ -49,5 +55,15 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function () {
         Route::patch('/{tag}', 'UpdateController')->name('admin.tags.update');
         Route::delete('/{tag}', 'DestroyController')->name('admin.tags.destroy');
     });
+
+    Route::group(['namespace' => 'User', 'prefix' => 'users'], function () {
+        Route::get('/', 'IndexController')->name('admin.users.index');
+        Route::get('/create', 'CreateController')->name('admin.users.create');
+        Route::post('/', 'StoreController')->name('admin.users.store');
+        Route::get('/{user}', 'ShowController')->name('admin.users.show');
+        Route::get('/{user}/edit', 'EditController')->name('admin.users.edit');
+        Route::patch('/{user}', 'UpdateController')->name('admin.users.update');
+        Route::delete('/{user}', 'DestroyController')->name('admin.users.destroy');
+    });
 });
-Auth::routes();
+Auth::routes(['verify' => true]);
