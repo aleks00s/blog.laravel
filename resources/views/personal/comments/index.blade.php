@@ -1,4 +1,4 @@
-@extends('admin.layouts.main')
+@extends('personal.layouts.main')
 @section('content')
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -7,12 +7,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Users</h1>
+                        <h1 class="m-0">Comments</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="{{ route('admin') }}">Home</a></li>
-                            <li class="breadcrumb-item active">Users</li>
+                            <li class="breadcrumb-item"><a href="{{ route('personal.main.index') }}">Home</a></li>
+                            <li class="breadcrumb-item active">Comments</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -26,12 +26,6 @@
 
                 <!-- Main row -->
                 <div class="row">
-                    <div class="col-1 mb-3">
-                        <a href="{{ route('admin.users.create') }}" class="btn btn-block btn-primary">
-                            Add user</a>
-                    </div>
-                </div>
-                <div class="row">
                     <div class="col-4">
                         <div class="card">
                             <div class="card-body table-responsive p-0">
@@ -39,28 +33,28 @@
                                     <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Name</th>
-                                        <th colspan="3"></th>
+                                        <th>Post</th>
+                                        <th colspan="2"></th>
 
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($users as $user)
-                                    <tr>
-                                        <td>{{$user->id}}</td>
-                                        <td>{{ $user->name }}</td>
-                                        <td><a href="{{ route('admin.users.show', $user->id) }}" class="far fa-eye" ></a></td>
-                                        <td><a href="{{ route('admin.users.edit', $user->id) }}" class="text-success fas fa-pen" ></a></td>
-                                        <td>
-                                            <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="border-0 bg-transparent">
-                                                    <i class="fas fa-trash text-danger" role="button"></i>
-                                                </button>
-                                            </form>
+                                    @foreach($comments as $comment)
+                                        <tr>
+                                            <td>{{$comment->id}}</td>
+                                            <td>{{ $comment->message }}</td>
+                                            <td><a href="{{ route('personal.comments.edit', $comment->id) }}" class="text-success fas fa-pen" ></a></td>
+
+                                            <td>
+                                                <form action="{{ route('personal.comments.delete', $comment->id) }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="border-0 bg-transparent">
+                                                        <i class="fas fa-trash text-danger" role="button"></i>
+                                                    </button>
+                                                </form>
                                             </td>
-                                    </tr>
+                                        </tr>
                                     @endforeach
 
                                     </tbody>

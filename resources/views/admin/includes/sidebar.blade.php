@@ -9,6 +9,14 @@
                 <!-- Add icons to the links using the .nav-icon class
                      with font-awesome or any other icon font library -->
                 <li>
+                    <a href="{{ route('admin') }}" class="nav-link">
+                        <i class="nav-icon fas fa-home"></i>
+                        <p>
+                            Main
+                        </p>
+                    </a>
+                </li>
+                <li>
                     <a href="{{ route('admin.users.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-user"></i>
                         <p>
