@@ -15,8 +15,21 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::group(['namespace' => 'Main'], function () {
-    Route::get('/', 'IndexController');
+    Route::get('/', 'IndexController')->name('main.index');
 });
+
+Route::group(['namespace' => 'Post', 'prefix' => 'posts'], function () {
+    Route::get('/', 'IndexController')->name('posts.index');
+    Route::get('/{post}', 'ShowController')->name('posts.show');
+
+    Route::group(['namespace' => 'Comment', 'prefix' => '{post}/comment'], function () {
+        Route::post('/', 'StoreController')->name('posts.comments.store');
+    });
+    Route::group(['namespace' => 'Like', 'prefix' => '{post}/likes'], function () {
+        Route::post('/', 'StoreController')->name('posts.likes.store');
+    });
+});
+
 Route::group(['middleware' => ['auth']], function() {
     Route::get('/logout', function () {
         Auth::logout();
